@@ -40,25 +40,20 @@ template<class T>
 
 const int mod = 1e9 + 7;
 const int inf = 1e9;
-const int N = 6e4 + 5;
+const int N = 1e4 + 5;
 
-int n, k;
-int dp[1005][55];
+int n, a[N];
+map<int, int> exist;
 
 void process() {
-    cin >> n >> k;
-    int sum = 0;
-    FOR(i, 1, n) {
-        int x; cin >> x;
-        sum += x;
-        REP(j, 0, k) {
-            maximize(dp[i][j], dp[i - 1][j]);
-            maximize(dp[i][(j + x) % k], dp[i - 1][j] + 1);
-        }
-        REP(j, 0, k) cout << i << ' ' << j << ' ' << dp[i][j] << '\n';
+    cin >> n;
+    FOR(i, 1, n) cin >> a[i], exist[a[i]] = 1;
+    int ans = 0;
+    int f1 = 1, f2 = 1;
+    FOR(i, 1, 50) {
+        f1 = f1 + f2;
+        swap(f1, f2);
     }
-    cout << sum << '\n';
-    cout << dp[n][0];
 }
 
 signed main() {
